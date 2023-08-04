@@ -9,6 +9,8 @@ const songSelector = document.getElementById('songSelector');
 const bodyTag = document.getElementsByTagName('body')[0];
 const progressBar = document.getElementById('progress-bar');
 const currentTimeElement = document.getElementById('current-time');
+const progressContainer = document.getElementById('progress-area');
+
 let clicked = '' ;
 let $ = document.querySelector;
 let songs = [];
@@ -43,7 +45,12 @@ function populateSongSelector() {
         songSelector.appendChild(option);
     });
 }
-
+function secondsToMinSec(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  return formattedTime;
+}
 function loadSongDetails(index) {
     const selectedSong = songs[index];
     if (selectedSong) {
@@ -53,6 +60,7 @@ function loadSongDetails(index) {
       console.log(selectedSong);
       document.querySelector('#name').innerHTML = selectedSong.name;
       document.querySelector('#artist').innerHTML = selectedSong.primaryArtists;
+      document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration);
     }
 }
 
@@ -134,6 +142,42 @@ function updateProgressBarAndTime() {
   const seconds = Math.floor(audioPlayer.currentTime % 60);
   const formattedTime = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   currentTimeElement.textContent = formattedTime;
+}
+
+
+// Update audio playback when clicking the progress bar
+progressContainer.addEventListener('click', (event) => {
+  const clickX = event.clientX - progressContainer.getBoundingClientRect().left;
+  const percent = (clickX / progressContainer.offsetWidth) * 100;
+  const newTime = (percent * audioPlayer.duration) / 100;
+  audioPlayer.currentTime = newTime;
+});
+
+// Dragging functionality for the progress bar
+let isDragging = false;
+
+progressContainer.addEventListener('mousedown', (event) => {
+  isDragging = true;
+  updateProgress(event);
+});
+
+document.addEventListener('mousemove', (event) => {
+  if (isDragging) {
+    updateProgress(event);
+  }
+});
+
+document.addEventListener('mouseup', () => {
+  if (isDragging) {
+    isDragging = false;
+  }
+});
+
+function updateProgress(event) {
+  const clickX = event.clientX - progressContainer.getBoundingClientRect().left;
+  const percent = (clickX / progressContainer.offsetWidth) * 100;
+  const newTime = (percent * audioPlayer.duration) / 100;
+  audioPlayer.currentTime = newTime;
 }
 
 // Update progress and time as audio plays

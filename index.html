@@ -4,6 +4,31 @@
   <title>Music Player</title>
   <link rel="stylesheet" href="https://bluredcodes.github.io/MusicPlayerCN/style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="manifest" href="manifest.json">
+
+<script>
+    // Check if the browser supports the beforeinstallprompt event
+    if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
+      window.addEventListener('load', () => {
+        // Wait for the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (event) => {
+          // Prevent the default "Add to Home Screen" prompt
+          event.preventDefault();
+
+          // Automatically show the "Add to Home Screen" prompt on page load
+          event.prompt();
+        });
+      });
+    }
+
+  window.addEventListener('load', () => {
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        event.prompt();
+      });
+    });
+  
+  </script>
 </head>
 <body>
   <div class="wrapper">
@@ -19,8 +44,8 @@
       <p id="name"></p>
       <p id="artist"></p>
     </div>
-    <div class="progress-area">
-      <div id="progress-bar" class="progress-bar" style="width: 13.1674%;">
+    <div class="progress-area" id="progress-area">
+      <div id="progress-bar" class="progress-bar" >
         <audio id="audioPlayer" src=""></audio>
       </div>
       <div class="song-timer">

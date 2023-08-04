@@ -1,0 +1,34 @@
+{
+  "background_color": "#ffffff",
+  "description": "Custom Music Players",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Saavn",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Saavn",
+  "start_url": "/?utm_source=pwa",
+  "theme_color": "#ffffff",
+  "categories": [
+    "social"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "https://i.imgur.com/5DmNBnI.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.imgur.com/5DmNBnI.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.imgur.com/CwOxrmG.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": []
+}
