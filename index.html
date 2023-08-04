@@ -5,38 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Switcher</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        .poster-container {
+            text-align: center;
+        }
+        .poster {
+            width: 100%;
+            max-width: 300px;
+            border: 2px solid #ff5b77;
+            border-radius: 10px;
+        }
+        .song-list-container {
+            margin-top: 20px;
+        }
+        .song-item {
+            cursor: pointer;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
+        .song-item:hover {
+            background-color: #383838;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="text-center mt-4">
-            <h1>Song Switcher</h1>
-        </div>
-        <div id="songContainer" class="text-center my-4">
+   <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="text-center">
+                <h1 class="mb-4">Song Switcher</h1>
+            </div>
             <div class="poster-container">
-                <img id="songImage" class="img-fluid rounded-circle" src="" alt="Song Image">
-            </div>
-            <div class="input-group mb-3">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search song...">
-                <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary">Search</button>
-                </div>
-            </div>
-            <select id="songSelector" class="form-control mb-3">
-                <!-- JavaScript will populate options here -->
-            </select>
-            <button id="playButton" class="btn btn-primary"><i class="bi bi-play"></i></button>
-            <audio id="audioPlayer" controls>
+                <img id="songImage" src="" alt="Song Poster" class="poster">
+              <audio id="audioPlayer" controls>
                 Your browser does not support the audio element.
             </audio>
-            <div class="mt-4">
-                <button id="prevButton" class="btn btn-secondary mr-2"><i class="bi bi-skip-backward"></i></button>
-                <button id="nextButton" class="btn btn-secondary"><i class="bi bi-skip-forward"></i></button>
+                <div class="mt-3">
+                    <button id="prevButton" class="btn btn-secondary"><i class="fas fa-backward"></i></button>
+                    <button id="playButton" class="btn btn-primary"><i class="fas fa-play"></i></button>
+                    <button id="nextButton" class="btn btn-secondary"><i class="fas fa-forward"></i></button>
+                </div>
             </div>
-          <div id="songList" class="song-list-container"></div>
-
+            <select id="songSelector" class="form-control mb-3"></select>
+            <div id="songList" class="song-list-container mt-3"></div>
+            <div class="text-center mt-3">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
+                <button id="searchButton" class="btn btn-primary mt-3">Search</button>
+            </div>
         </div>
     </div>
+</div>
+
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <script src="script.js"></script>
 </body>

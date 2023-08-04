@@ -16,20 +16,38 @@ const queries = [
     'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra'
 ];
 
-function fetchSongs(query, page) {
-    fetch(`https://saavn.me/search/songs?query=${query}&page=${page}`)
+function fetchSongs(query) {
+    fetch(`https://saavn.me/search/songs?query=${query}&page=1`)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
                 songs = [...songs, ...data.data.results];
-                if (page === 5) { // Fetch up to page 5 for each query
-                    updateUI();
-                }
+                updateUI();
             }
         })
         .catch(error => {
             console.error('Error fetching songs:', error);
         });
+}
+
+function populateSongSelector() {
+    songSelector.innerHTML = '';
+
+    songs.forEach((song, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.text = `${song.name} - ${song.primaryArtists}`;
+        songSelector.appendChild(option);
+    });
+}
+
+function loadSongDetails(index) {
+    const selectedSong = songs[index];
+    if (selectedSong) {
+        audioPlayer.src = selectedSong.downloadUrl[4].link; // Using 320kbps quality
+        audioPlayer.play();
+        songImage.src = selectedSong.image[2].link; // Using 500x500 image
+    }
 }
 
 function updateUI() {
@@ -55,25 +73,6 @@ function populateSongList() {
     });
 }
 
-
-function loadSongDetails(index) {
-    const selectedSong = songs[index];
-    if (selectedSong) {
-        audioPlayer.src = selectedSong.downloadUrl[4].link; // Using 320kbps quality
-        audioPlayer.play();
-        songImage.src = selectedSong.image[2].link; // Using 500x500 image
-    }
-}
-
-
-function loadNextPage() {
-    currentSongIndex = 0;
-    const query = searchInput.value.trim() || queries[Math.floor(Math.random() * queries.length)];
-    for (let page = 1; page <= 5; page++) { // Fetch up to page 5 for each query
-        fetchSongs(query, page);
-    }
-}
-
 // Automatically change song when the user selects a song from the selector
 songSelector.addEventListener('change', () => {
     currentSongIndex = parseInt(songSelector.value);
@@ -91,8 +90,6 @@ nextButton.addEventListener('click', () => {
     if (currentSongIndex < songs.length - 1) {
         currentSongIndex++;
         updateUI();
-    } else {
-        loadNextPage();
     }
 });
 
@@ -102,8 +99,6 @@ swipe.on('swipeleft', () => {
     if (currentSongIndex < songs.length - 1) {
         currentSongIndex++;
         updateUI();
-    } else {
-        loadNextPage();
     }
 });
 swipe.on('swiperight', () => {
@@ -116,7 +111,7 @@ swipe.on('swiperight', () => {
 // Search button event listener
 searchButton.addEventListener('click', () => {
     songs = [];
-    loadNextPage();
+    fetchSongs(searchInput.value.trim());
 });
 
 // Auto-change song after completion
@@ -124,13 +119,11 @@ audioPlayer.addEventListener('ended', () => {
     if (currentSongIndex < songs.length - 1) {
         currentSongIndex++;
         updateUI();
-    } else {
-        loadNextPage();
     }
 });
 
 // Initial fetch
-loadNextPage();
+fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
 
 // Log the complete JSON data
 console.log(JSON.stringify(songs, null, 2));
