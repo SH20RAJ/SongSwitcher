@@ -18,7 +18,7 @@ let currentSongIndex = 0;
 
 const queries = [
     'darshan', 'arijit', 'lofi', 'sad', 'love', 'tseries',
-    'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra'
+    'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra', 'armaan','honey singh'
 ];
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -204,10 +204,10 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 // Initial fetch
-fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
-fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
-fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
-fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
 
 // Log the complete JSON data
 console.log(JSON.stringify(songs, null, 2));
