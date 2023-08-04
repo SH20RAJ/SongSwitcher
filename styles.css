@@ -1,0 +1,53 @@
+/* Add your custom CSS styles here */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.poster-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.poster-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin: 0 10px;
+}
+
+#songSelector {
+    text-align-last: center;
+}
+
+@media (max-width: 576px) {
+    .poster-container {
+        max-width: 80%;
+    }
+}

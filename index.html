@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Switcher</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mt-4">
+            <h1>Song Switcher</h1>
+        </div>
+        <div id="songContainer" class="text-center my-4">
+            <div class="poster-container">
+                <img id="songImage" class="img-fluid rounded-circle" src="" alt="Song Image">
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search song...">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+            <select id="songSelector" class="form-control mb-3">
+                <!-- JavaScript will populate options here -->
+            </select>
+            <button id="playButton" class="btn btn-primary"><i class="bi bi-play"></i></button>
+            <audio id="audioPlayer" controls>
+                Your browser does not support the audio element.
+            </audio>
+            <div class="mt-4">
+                <button id="prevButton" class="btn btn-secondary mr-2"><i class="bi bi-skip-backward"></i></button>
+                <button id="nextButton" class="btn btn-secondary"><i class="bi bi-skip-forward"></i></button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
