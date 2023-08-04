@@ -20,14 +20,27 @@ const queries = [
     'darshan', 'arijit', 'lofi', 'sad', 'love', 'tseries',
     'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra'
 ];
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
-function fetchSongs(query) {
+function fetchSongs(query,random) {
     fetch(`https://saavn.me/search/songs?query=${query}&page=1&limit=500`)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
+              if(random){
+                songs = shuffleArray([...songs, ...data.data.results]);
+              } else {
                 songs = [...songs, ...data.data.results];
-                updateUI();
+              };
+
+              
+              updateUI();
             }
         })
         .catch(error => {
@@ -191,6 +204,9 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 // Initial fetch
+fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
 fetchSongs(queries[Math.floor(Math.random() * queries.length)]);
 
 // Log the complete JSON data
