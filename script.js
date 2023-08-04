@@ -17,7 +17,7 @@ const queries = [
 ];
 
 function fetchSongs(query) {
-    fetch(`https://saavn.me/search/songs?query=${query}&page=1`)
+    fetch(`https://saavn.me/search/songs?query=${query}&page=1&limit=500`)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
