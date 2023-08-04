@@ -85,7 +85,7 @@ function populateSongList() {
                   <span>${song.name}</span>
                   <p>${song.primaryArtists}</p>
                 </div>
-                <span id="music-1" class="audio-duration" t-duration="3:36">3:36</span>
+                <span id="music-1" class="audio-duration" t-duration="3:36">${secondsToMinSec(song.duration)}</span>
 
               </li>`;
         listItem.addEventListener('click', () => {
@@ -129,8 +129,7 @@ nextButton.addEventListener('click', () => {
 
 // Search button event listener
 searchButton.addEventListener('click', () => {
-    songs = [];
-    fetchSongs(searchInput.value.trim());
+    songs = [];fetchSongs(searchInput.value.trim());
 });
 
 // Update progress bar and time
