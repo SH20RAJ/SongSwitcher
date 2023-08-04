@@ -1,69 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Switcher</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Add your custom styles here */
-        body {
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
-        .poster-container {
-            text-align: center;
-        }
-        .poster {
-            width: 100%;
-            max-width: 300px;
-            border: 2px solid #ff5b77;
-            border-radius: 10px;
-        }
-        .song-list-container {
-            margin-top: 20px;
-        }
-        .song-item {
-            cursor: pointer;
-            padding: 5px;
-            transition: background-color 0.3s;
-        }
-        .song-item:hover {
-            background-color: #383838;
-        }
-    </style>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <link rel="stylesheet" href="https://bluredcodes.github.io/MusicPlayerCN/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-   <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <div class="text-center">
-                <h1 class="mb-4">Song Switcher</h1>
-            </div>
-            <div class="poster-container">
-                <img id="songImage" src="" alt="Song Poster" class="poster">
-              <audio id="audioPlayer" controls>
-                Your browser does not support the audio element.
-            </audio>
-                <div class="mt-3">
-                    <button id="prevButton" class="btn btn-secondary"><i class="fas fa-backward"></i></button>
-                    <button id="playButton" class="btn btn-primary"><i class="fas fa-play"></i></button>
-                    <button id="nextButton" class="btn btn-secondary"><i class="fas fa-forward"></i></button>
-                </div>
-            </div>
-            <select id="songSelector" class="form-control mb-3"></select>
-            <div id="songList" class="song-list-container mt-3"></div>
-            <div class="text-center mt-3">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
-                <button id="searchButton" class="btn btn-primary mt-3">Search</button>
-            </div>
-        </div>
+  <div class="wrapper">
+    <div class="top-bar">
+      <i class="material-icons">expand_more</i>
+      <span>Now Playing</span>
+      <i class="material-icons">more_horiz</i>
     </div>
-</div>
+    <div class="img-area">
+      <img id="songImage" src="images/music-3.jpg" alt="">
+    </div>
+    <div class="song-details">
+      <p id="name"></p>
+      <p id="artist"></p>
+    </div>
+    <div class="progress-area">
+      <div id="progress-bar" class="progress-bar" style="width: 13.1674%;">
+        <audio id="audioPlayer" src=""></audio>
+      </div>
+      <div class="song-timer">
+        <span id="current-time" class="current-time">0:24</span>
+        <span id="max-duration" class="max-duration">3:08</span>
+      </div>
+    </div>
+    <div class="controls">
+      <i id="repeat-plist" class="material-icons" title="Playback shuffled">shuffle</i>
+      <i id="prevButton" class="material-icons">skip_previous</i>
+      <div class="play-pause">
+        <i id="playButton" class="material-icons play">pause</i>
+      </div>
+      <i id="nextButton" class="material-icons">skip_next</i>
+      <i onclick="document.querySelector('.music-list').classList.toggle('show')
+;" id="more-music" class="material-icons">queue_music</i>
+    </div>
+    <div class="music-list">
+      <div class="header">
+        <div class="row">
+          <i class="list material-icons">queue_music</i>
+          <span>Music list</span>
+        </div>
+        <i onclick="document.querySelector('.music-list').classList.toggle('show')
+" id="close" class="material-icons">close</i>
+      </div>
+      <ul id="songList"></ul>
+    </div>
+  </div>
+  <div class="hidden" style="display: none;">
+<select id="songSelector" class="form-control mb-3"></select>
+    <button id="searchButton" class="btn btn-primary mt-3">Search</button>
+  </div>
+            
 
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+  <script src="2.js"></script>
+
+
+
+</body></html>
