@@ -6,19 +6,25 @@ const songImage = document.getElementById('songImage');
 const prevButton = document.getElementById('prevButton');
 const nextButton = document.getElementById('nextButton');
 const songSelector = document.getElementById('songSelector');
-const posterContainer = document.querySelector('.poster-container');
+const bodyTag = document.getElementsByTagName('body')[0];
 
 let songs = [];
 let currentSongIndex = 0;
+
+const queries = [
+    'darshan', 'arijit', 'lofi', 'sad', 'love', 'tseries',
+    'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra'
+];
 
 function fetchSongs(query, page) {
     fetch(`https://saavn.me/search/songs?query=${query}&page=${page}`)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
-                songs = data.data.results;
-                populateSongSelector();
-                updateUI();
+                songs = [...songs, ...data.data.results];
+                if (page === 5) { // Fetch up to page 5 for each query
+                    updateUI();
+                }
             }
         })
         .catch(error => {
@@ -26,16 +32,29 @@ function fetchSongs(query, page) {
         });
 }
 
-function populateSongSelector() {
-    songSelector.innerHTML = '';
+function updateUI() {
+    loadSongDetails(currentSongIndex);
+    songSelector.value = currentSongIndex;
+
+    populateSongList(); // Call the function to populate the song list
+}
+
+function populateSongList() {
+    const songListContainer = document.getElementById('songList');
+    songListContainer.innerHTML = ''; // Clear the container
 
     songs.forEach((song, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.text = `${song.name} - ${song.primaryArtists}`;
-        songSelector.appendChild(option);
+        const listItem = document.createElement('div');
+        listItem.classList.add('song-item');
+        listItem.innerHTML = `<p>${song.name} - ${song.primaryArtists}</p>`;
+        listItem.addEventListener('click', () => {
+            currentSongIndex = index;
+            updateUI();
+        });
+        songListContainer.appendChild(listItem);
     });
 }
+
 
 function loadSongDetails(index) {
     const selectedSong = songs[index];
@@ -46,16 +65,13 @@ function loadSongDetails(index) {
     }
 }
 
-function updateUI() {
-    loadSongDetails(currentSongIndex);
-    songSelector.value = currentSongIndex;
-}
 
 function loadNextPage() {
     currentSongIndex = 0;
-    const query = searchInput.value.trim() || 'darshan'; // Use search input or default query
-    const currentPage = Math.floor(songs.length / 10) + 1; // Calculate the next page
-    fetchSongs(query, currentPage);
+    const query = searchInput.value.trim() || queries[Math.floor(Math.random() * queries.length)];
+    for (let page = 1; page <= 5; page++) { // Fetch up to page 5 for each query
+        fetchSongs(query, page);
+    }
 }
 
 // Automatically change song when the user selects a song from the selector
@@ -80,8 +96,9 @@ nextButton.addEventListener('click', () => {
     }
 });
 
-// Swipe gestures setup
-posterContainer.addEventListener('swipeleft', () => {
+// Swipe gestures setup for the whole body
+const swipe = new Hammer(bodyTag);
+swipe.on('swipeleft', () => {
     if (currentSongIndex < songs.length - 1) {
         currentSongIndex++;
         updateUI();
@@ -89,7 +106,7 @@ posterContainer.addEventListener('swipeleft', () => {
         loadNextPage();
     }
 });
-posterContainer.addEventListener('swiperight', () => {
+swipe.on('swiperight', () => {
     if (currentSongIndex > 0) {
         currentSongIndex--;
         updateUI();
@@ -98,6 +115,7 @@ posterContainer.addEventListener('swiperight', () => {
 
 // Search button event listener
 searchButton.addEventListener('click', () => {
+    songs = [];
     loadNextPage();
 });
 
@@ -112,4 +130,10 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 // Initial fetch
-fetchSongs('darshan', 1);
+loadNextPage();
+
+// Log the complete JSON data
+console.log(JSON.stringify(songs, null, 2));
+
+// Store songs in local storage
+localStorage.setItem('songs', JSON.stringify(songs));
