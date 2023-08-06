@@ -24,6 +24,7 @@ body{
   justify-content: center;
   min-height: 100vh;
   background: linear-gradient(var(--pink) 0%, var(--violet) 100%);
+  overflow: hidden;
 }
 .wrapper{
   width: 380px;

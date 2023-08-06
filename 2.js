@@ -74,8 +74,38 @@ function loadSongDetails(index) {
       document.querySelector('#name').innerHTML = selectedSong.name;
       document.querySelector('#artist').innerHTML = selectedSong.primaryArtists;
       document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration);
+
+
+      preloadAudio(selectedSong);
+
+      
+        // Update download button link
+        const downloadButton = document.getElementById('downloadButton');
+        downloadButton.onclick = () => downloadAudio(selectedSong);
     }
 }
+
+function downloadAudio(song) {return false;}
+
+function preloadAudio(song) {
+    const preloadAudio = document.getElementById('preloadAudio');
+    preloadAudio.src = song.downloadUrl[4].link;
+
+    preloadAudio.addEventListener('canplaythrough', () => {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createBufferSource();
+
+        fetch(song.downloadUrl[4].link)
+            .then(response => response.arrayBuffer())
+            .then(data => audioContext.decodeAudioData(data))
+            .then(buffer => {
+                source.buffer = buffer;
+                source.connect(audioContext.destination);
+            })
+            .catch(error => console.error('Error decoding audio:', error));
+    });
+}
+
 
 function updateUI() {
     loadSongDetails(currentSongIndex);
@@ -138,7 +168,6 @@ nextButton.addEventListener('click', () => {
         updateUI();
     }
 });
-
 
 // Search button event listener
 searchButton.addEventListener('click', () => {

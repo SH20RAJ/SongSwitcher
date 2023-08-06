@@ -65,6 +65,9 @@
       <i id="nextButton" class="material-icons">skip_next</i>
       <i onclick="document.querySelector('.music-list').classList.toggle('show')
 ;" id="more-music" class="material-icons">queue_music</i>
+      <a id="downloadButton" href="#" download="song-name.mp3">
+    <i class="material-icons">download</i>
+</a>
     </div>
     <div class="music-list">
       <div class="header">
@@ -103,7 +106,8 @@
       </ul>
     </div>
           
-  
+  <audio id="preloadAudio" preload="auto" style="display: none;"></audio>
+
   <script src="2.js"></script>
 
 
