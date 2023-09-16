@@ -27,6 +27,7 @@ function shuffleArray(array) {
   }
   return array;
 }
+
 function fetchSongs(query,random) {
     fetch(`https://saavn.me/search/songs?query=${query}&page=1&limit=500`)
         .then(response => response.json())
@@ -46,6 +47,7 @@ function fetchSongs(query,random) {
             console.error('Error fetching songs:', error);
         });
 }
+
 function populateSongSelector() {
     songSelector.innerHTML = '';
 
@@ -81,9 +83,10 @@ function loadSongDetails(index) {
         const downloadButton = document.getElementById('downloadButton');
         downloadButton.onclick = () => downloadAudio(selectedSong);
     }
-  updateLikeButtonState();
 }
+
 function downloadAudio(song) {return false;}
+
 function preloadAudio(song) {
     const preloadAudio = document.getElementById('preloadAudio');
     preloadAudio.src = song.downloadUrl[4].link;
@@ -102,13 +105,15 @@ function preloadAudio(song) {
             .catch(error => console.error('Error decoding audio:', error));
     });
 }
+
+
 function updateUI() {
     loadSongDetails(currentSongIndex);
     songSelector.value = currentSongIndex;
 
     populateSongList(); // Call the function to populate the song list
-  playpause();
 }
+
 function populateSongList() {
     const songListContainer = document.getElementById('songList');
     songListContainer.innerHTML = ''; // Clear the container
@@ -133,69 +138,6 @@ function populateSongList() {
         songListContainer.appendChild(listItem);
     });
 }
-//Liked Songs
-const likeButton = document.getElementById('likeButton');
-const likedSongs = [];
-
-// Toggle song like
-likeButton.addEventListener('click', () => {
-    const likedSong = songs[currentSongIndex];
-    if (likedSongs.includes(likedSong)) {
-        // Unlike the song
-        likedSongs.splice(likedSongs.indexOf(likedSong), 1);
-    } else {
-        // Like the song
-        likedSongs.push(likedSong);
-    }
-    updateLikeButtonState();
-    updateLikedSongsStorage();
-});
-
-// Update like button state based on whether the current song is liked or not
-function updateLikeButtonState() {
-    const likedSong = songs[currentSongIndex];
-    if (likedSongs.includes(likedSong)) {
-        likeButton.classList.add('liked');
-    } else {
-        likeButton.classList.remove('liked');
-    }
-}
-
-
-// Update local storage with liked songs
-function updateLikedSongsStorage() {
-    localStorage.setItem('likedSongs', JSON.stringify(likedSongs));
-}
-
-// Load liked songs from local storage on page load
-const likedSongsFromStorage = localStorage.getItem('likedSongs');
-if (likedSongsFromStorage) {
-    likedSongs.push(...JSON.parse(likedSongsFromStorage));
-}
-
-const likedSongsList = document.getElementById('likedSongsList');
-
-// Update liked songs list in the UI
-
-function populateSongList() {
-    // ...
-    songs.forEach((song, index) => {
-        const listItem = document.createElement('div');
-        listItem.classList.add('song-item');
-        listItem.innerHTML = `<p>${song.name} - ${song.primaryArtists}</p>`;
-        listItem.addEventListener('click', () => {
-            currentSongIndex = index;
-            updateUI();
-            audioPlayer.play(); // Play the song
-        });
-        songListContainer.appendChild(listItem);
-    });
-}
-
-
-// Call this function whenever liked songs are updated
-//populateLikedSongsList();
-
 
 // Automatically change song when the user selects a song from the selector
 songSelector.addEventListener('change', () => {
@@ -211,18 +153,14 @@ prevButton.addEventListener('click', () => {
 });
 
 playButton.addEventListener('click', () => {
-    playpause();
-});
-
-let playpause = () => {
-  if (audioPlayer.paused) {
+    if (audioPlayer.paused) {
         audioPlayer.play();
       playButton.innerHTML = 'pause';
     } else {
       audioPlayer.pause()
       playButton.innerHTML = 'play_arrow';
     }
-}
+});
 
 nextButton.addEventListener('click', () => {
     if (currentSongIndex < songs.length - 1) {

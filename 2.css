@@ -41,7 +41,6 @@ body{
 }
 .top-bar, .progress-area .song-timer, 
 .controls, .music-list .header, .music-list ul li{
-  user-select: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -270,11 +269,3 @@ ul li.playing{
     background: transparent;
     border: 0;
 }
-
-.controls .liked {
-    user-select: none;
-    background: linear-gradient(red 0%, red 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
