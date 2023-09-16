@@ -71,38 +71,46 @@ function loadSongDetails(index) {
         audioPlayer.play();
         songImage.src = selectedSong.image[2].link; // Using 500x500 image
       console.log(selectedSong);
+      window.currentsong = selectedSong;
       document.querySelector('#name').innerHTML = selectedSong.name;
       document.querySelector('#artist').innerHTML = selectedSong.primaryArtists;
-      document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration);
-
-
-      preloadAudio(selectedSong);
-
-      
+      document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration); 
         // Update download button link
         const downloadButton = document.getElementById('downloadButton');
         downloadButton.onclick = () => downloadAudio(selectedSong);
     }
 }
 
-function downloadAudio(song) {return false;}
+function downloadAudio(song) {
+  const audioUrl = song.downloadUrl[4].link; // Replace 4 with the appropriate index
 
-function preloadAudio(song) {
-    const preloadAudio = document.getElementById('preloadAudio');
-    preloadAudio.src = song.downloadUrl[4].link;
+  fetch(audioUrl)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const base64Data = reader.result.split(',')[1]; // Extract the Base64 data
 
-    preloadAudio.addEventListener('canplaythrough', () => {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const source = audioContext.createBufferSource();
+        // Create an anchor element to trigger the download
+        const a = document.createElement('a');
+        a.href = `data:audio/mp3;base64,${base64Data}`;
+        a.download = `${song.name}.mp3`; // Set the desired filename
 
-        fetch(song.downloadUrl[4].link)
-            .then(response => response.arrayBuffer())
-            .then(data => audioContext.decodeAudioData(data))
-            .then(buffer => {
-                source.buffer = buffer;
-                source.connect(audioContext.destination);
-            })
-            .catch(error => console.error('Error decoding audio:', error));
+        // Trigger a click event on the anchor to initiate the download
+        a.dispatchEvent(new MouseEvent('click'));
+
+        // Cleanup
+        URL.revokeObjectURL(a.href);
+      };
+      reader.readAsDataURL(blob);
+    })
+    .catch((error) => {
+      console.error('Error downloading audio:', error);
     });
 }
 
