@@ -88,14 +88,17 @@
     <button id="searchButton" class="btn btn-primary mt-3">Search</button>
   </div>
 
-<div id="list" class="music-list">
+<div id="list" class="music-list show">
       <div class="header">
-        <div class="row">
-          <i class="list material-icons">queue_music</i>
-          <div><div class="search">
+       <i class="list material-icons">queue_music</i>
+       <div class="row">
+          <div class="search">
                 <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
-                <button id="searchButton" class="btn btn-primary mt-3" onclick="songs = [];fetchSongs(searchInput.value.trim());">Search</button>
-            </div></div>
+                <button id="searchButton" class="btn btn-primary mt-3" onclick="songs = [];fetchSongs(searchInput.value.trim());">
+                  <i onclick="document.querySelector('.music-list').classList.toggle('show')
+                  " id="close" class="material-icons">search</i>
+                </button>
+          </div>
         </div>
         <i onclick="document.querySelector('#list').classList.toggle('show')
 " id="close" class="material-icons">close</i>
