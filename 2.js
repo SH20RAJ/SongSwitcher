@@ -81,6 +81,8 @@ function loadSongDetails(index) {
         // Update download button link
         const downloadButton = document.getElementById('downloadButton');
         downloadButton.onclick = () => downloadAudio(selectedSong);
+
+      document.title = selectedSong.name;
     }
 }
 
