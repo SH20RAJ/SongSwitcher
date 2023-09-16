@@ -17,8 +17,8 @@ let songs = [];
 let currentSongIndex = 0;
 
 const queries = [
-    'darshan', 'arijit', 'lofi', 'sad', 'love', 'tseries',
-    'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra', 'armaan','honey singh','jalraj'
+    'darshan rawal', 'arijit', 'lofi', 'sad', 'love', 'tseries',
+    'b praak', 'sony music', 'zee music', 'jubin', 'vishal mishra', 'armaan malik','honey singh','jalraj','new remix'
 ];
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -72,8 +72,11 @@ function loadSongDetails(index) {
         songImage.src = selectedSong.image[2].link; // Using 500x500 image
       console.log(selectedSong);
       window.currentsong = selectedSong;
+      let str = selectedSong.primaryArtists;
+      if(str.length > 10) str = str.substring(0,30)
       document.querySelector('#name').innerHTML = selectedSong.name;
-      document.querySelector('#artist').innerHTML = selectedSong.primaryArtists;
+       ;
+      document.querySelector('#artist').innerHTML = str;
       document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration); 
         // Update download button link
         const downloadButton = document.getElementById('downloadButton');
@@ -132,7 +135,10 @@ function populateSongList() {
         listItem.innerHTML = `
         
       <li li-index="1" onclick="clicked(this)">
-                <div class="row">
+                <img style="display: inli;border-radius:10px;" height="40" src="${song.image[1].link}" alt="" srcset="">
+<div class="row" style="width: 100%;
+margin-left: 10px;">
+
                   <span>${song.name}</span>
                   <p>${song.primaryArtists}</p>
                 </div>
@@ -241,9 +247,6 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 // Initial fetch
-fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
-fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
-fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
 fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
 
 // Log the complete JSON data

@@ -35,10 +35,12 @@
 <body>
   <div class="wrapper">
     <div class="top-bar">
-      <i class="material-icons">expand_more</i>
-      <span>Now Playing</span>
       <i onclick="document.querySelector('#list').classList.toggle('show')
-;" class="material-icons">more_horiz</i>
+;" class="material-icons">search</i>
+      <span>Now Playing</span>
+      
+<i onclick="document.querySelector('.music-list').classList.toggle('show')
+;" id="more-music" class="material-icons">queue_music</i>
     </div>
     <div class="img-area">
       <img id="songImage" src="logo.png" alt="...">
@@ -60,11 +62,11 @@
       <i id="repeat-plist" class="material-icons" title="Playback shuffled">shuffle</i>
       <i id="prevButton" class="material-icons">skip_previous</i>
       <div class="play-pause">
-        <i id="playButton" class="material-icons play">play_arrow</i>
+        <i id="playButton" class="material-icons play">pause</i>
       </div>
       <i id="nextButton" class="material-icons">skip_next</i>
-      <i onclick="document.querySelector('.music-list').classList.toggle('show')
-;" id="more-music" class="material-icons">queue_music</i>
+      <!-- <i onclick="document.querySelector('.music-list').classList.toggle('show')
+;" id="more-music" class="material-icons">queue_music</i> -->
       <a id="downloadButton" href="#">
     <i class="material-icons">download</i>
 </a>
@@ -72,7 +74,7 @@
     <div class="music-list">
       <div class="header">
         <div class="row">
-          <i class="list material-icons">queue_music</i>
+          <i class="list material-icons" onclick="fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);">refresh</i>
           <span>Music list</span>
         </div>
         <i onclick="document.querySelector('.music-list').classList.toggle('show')
