@@ -84,7 +84,7 @@ function loadSongDetails(index) {
 
       document.title = selectedSong.name;
       location.hash=selectedSong.id;
-      
+
       document.body.style.backgroundImage= `url(${selectedSong.image[2].link})`;
       // Step 2: Blur the background image using CSS
 document.body.style.backgroundSize = 'cover';
@@ -279,6 +279,9 @@ document.getElementById('looper').addEventListener('click',()=>{
 
 // Initial fetch
 fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],1);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);
+fetchSongs(queries[Math.floor(Math.random() * queries.length)],1);
 
 // Log the complete JSON data
 console.log(JSON.stringify(songs, null, 2));

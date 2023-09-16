@@ -9,11 +9,11 @@
   padding: 0;
   margin: 0;
 }
-:root{
+:root {
   --pink: #ff74a4;
   --violet: #9f6ea3;
-  --lightblack: #515C6F;
-  --white: #faebd79e;
+  --lightblack: #fff;
+  --white: #48404842;
   --darkwhite: #cecaca;
   --pinkshadow: #ffcbdd;
   --lightbshadow: rgba(0,0,0,0.15);
