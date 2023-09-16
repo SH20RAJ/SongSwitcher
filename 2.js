@@ -173,7 +173,7 @@ playButton.addEventListener('click', () => {
         audioPlayer.play();
       playButton.innerHTML = 'pause';
     } else {
-      audioPlayer.pause()
+      audioPlayer.pause();
       playButton.innerHTML = 'play_arrow';
     }
 });
@@ -242,11 +242,31 @@ audioPlayer.addEventListener('timeupdate', updateProgressBarAndTime);
 
 // Auto-change song after completion
 audioPlayer.addEventListener('ended', () => {
+  if(window.looped){
+    audioPlayer.looped =1;
+    console.log(looped)
+    audioPlayer.play()
+  } else {
     if (currentSongIndex < songs.length - 1) {
         currentSongIndex++;
         updateUI();
     }
+  }
+    
 });
+
+document.getElementById('looper').addEventListener('click',()=>{
+  if(!window.looped){
+    window.looped=1;
+    document.getElementById('looper').innerHTML = 'repeat_one';
+  } else {
+    window.looped=0;
+    document.getElementById('looper').innerHTML = 'repeat';
+
+  }
+    
+  })
+
 
 // Initial fetch
 fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);

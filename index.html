@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="controls">
-      <i id="repeat-plist" class="material-icons" title="Playback shuffled">shuffle</i>
+      <i id="looper" class="material-icons" title="Playback shuffled">repeat</i>
       <i id="prevButton" class="material-icons">skip_previous</i>
       <div class="play-pause">
         <i id="playButton" class="material-icons play">pause</i>
@@ -71,11 +71,19 @@
     <i class="material-icons">download</i>
 </a>
     </div>
-    <div class="music-list">
+    <div class="music-list ">
       <div class="header">
+        <i class="list material-icons" onclick="fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);">refresh</i>
+
         <div class="row">
-          <i class="list material-icons" onclick="fetchSongs(queries[Math.floor(Math.random() * queries.length)],true);">refresh</i>
-          <span>Music list</span>
+          <!-- <span>Music list</span> -->
+          <div class="search">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
+            <button id="searchButton" class="btn btn-primary mt-3" onclick="songs = [];fetchSongs(searchInput.value.trim());">
+              <i ondbclick="document.querySelector('.music-list').classList.toggle('show')
+              " id="close" class="material-icons" style="position:absolute;top:0 ;margin-top: 8px;">search</i>
+            </button>
+        </div>
         </div>
         <i onclick="document.querySelector('.music-list').classList.toggle('show')
 " id="close" class="material-icons">close</i>
