@@ -5,11 +5,147 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SaavnXX - Music Stream and Download</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    /* Updated CSS for black theme, Poppins font, and layout */
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #222;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #444;
+    }
+
+    .song-list {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #111;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .song {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 5px;
+      transition: transform 0.2s ease;
+    }
+
+    .song:hover {
+      transform: scale(1.02);
+    }
+
+    .song img {
+      width: 80px;
+      height: 80px;
+      margin-right: 20px;
+      border-radius: 5px;
+    }
+
+    .song-details {
+      flex: 1;
+    }
+
+    .song-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .song-artist {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .song-controls {
+      display: flex;
+      align-items: center;
+    }
+
+    .song-length {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .download-button {
+      background-color: #1db954;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 16px;
+    }
+
+    .download-button:hover {
+      background-color: #15a147;
+    }
+  </style>
 </head>
 <body>
+  <!-- <header>
+    <h1>SaavnXX Music</h1>
+  </header> -->
   <nav>
-    
+    <a href="#">Home</a>
+    <a href="#">Browse</a>
+    <a href="#">Genres</a>
+    <a href="#">Search</a>
   </nav>
-  
+  <div class="song-list">
+    <div class="song">
+      <img src="poster.png" alt="Sample Image">
+      <div class="song-details">
+        <p class="song-title">Song Name 1</p>
+        <p class="song-artist">Artist Name 1</p>
+      </div>
+      <div class="song-controls">
+        <p class="song-length">3:45</p>
+        <button class="download-button">Download</button>
+      </div>
+    </div>
+    <div class="song">
+      <img src="poster.png" alt="Sample Image">
+      <div class="song-details">
+        <p class="song-title">Song Name 2</p>
+        <p class="song-artist">Artist Name 2</p>
+      </div>
+      <div class="song-controls">
+        <p class="song-length">4:20</p>
+        <button class="download-button">Download</button>
+      </div>
+    </div>
+    <!-- Add more song entries here -->
+  </div>
 </body>
 </html>

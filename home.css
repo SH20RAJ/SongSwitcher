@@ -1,0 +1,18 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.songs {
+    display: flex;
+    padding: 2px;
+    width: 100%;
+    background-color: aliceblue;
+}
+.songs .song {
+    height: 80px;
+    width: 100%;
+}
+.song img {
+    height: 100%;
+}
