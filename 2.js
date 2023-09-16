@@ -83,6 +83,15 @@ function loadSongDetails(index) {
         downloadButton.onclick = () => downloadAudio(selectedSong);
 
       document.title = selectedSong.name;
+      location.hash=selectedSong.id;
+      
+      document.body.style.backgroundImage= `url(${selectedSong.image[2].link})`;
+      // Step 2: Blur the background image using CSS
+document.body.style.backgroundSize = 'cover';
+//document.body.style = 'blur(10px)'; // Adjust the blur intensity as needed
+// Step 3: Add a class to remove the filter when scrolling down again
+
+
     }
 }
 

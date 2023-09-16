@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Style for the container div */
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Style for the image with the gradient background */
+        .image-with-gradient {
+            display: block;
+            width: 300px; /* Set the width and height as per your requirements */
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Create a container for the image and gradient -->
+    <div class="image-container">
+        <!-- Use the CORS Anywhere proxy to load the image from a different domain -->
+        <img
+            id="original-image"
+            src="https://cors-anywhere.herokuapp.com/https://c.saavncdn.com/401/Loveyatri-A-Journey-Of-Love-Hindi-2018-20181003-500x500.jpg"
+            alt="Image"
+        >
+        <div class="image-with-gradient" id="image-with-gradient"></div>
+    </div>
+
+    <script>
+        // Get references to the image and the element where the gradient will be applied
+        const originalImage = document.getElementById('original-image');
+        const imageWithGradient = document.getElementById('image-with-gradient');
+
+        // Function to calculate the color gradient
+        function calculateGradient(image) {
+            // Create a canvas element to work with the image
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+
+            // Get the pixel data of the image
+            const imageData = ctx.getImageData(0, 0, image.width, image.height).data;
+
+            // Calculate the average color of the image
+            let totalR = 0, totalG = 0, totalB = 0;
+            for (let i = 0; i < imageData.length; i += 4) {
+                totalR += imageData[i];
+                totalG += imageData[i + 1];
+                totalB += imageData[i + 2];
+            }
+            const averageR = Math.floor(totalR / (imageData.length / 4));
+            const averageG = Math.floor(totalG / (imageData.length / 4));
+            const averageB = Math.floor(totalB / (imageData.length / 4));
+
+            // Create a gradient with the average color
+            const gradient = `linear-gradient(rgba(${averageR}, ${averageG}, ${averageB}, 0), rgba(${averageR}, ${averageG}, ${averageB}, 1))`;
+
+            // Apply the gradient as the background
+            document.body.style.background = gradient;
+        }
+
+        // Call the function to calculate the gradient when the image is loaded
+        originalImage.onload = () => {
+            calculateGradient(originalImage);
+        };
+    </script>
+</body>
+</html>
