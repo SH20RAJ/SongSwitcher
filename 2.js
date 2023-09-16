@@ -28,8 +28,10 @@ function shuffleArray(array) {
   return array;
 }
 
-function fetchSongs(query,random) {
-    fetch(`https://saavn.me/search/songs?query=${query}&page=1&limit=500`)
+function fetchSongs(query,random,url) {
+  url = (url)?url:`https://saavn.me/search/songs?query=${query}&page=1&limit=500`;
+  console.log(url)
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
