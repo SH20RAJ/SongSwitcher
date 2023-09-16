@@ -88,7 +88,7 @@
     <button id="searchButton" class="btn btn-primary mt-3">Search</button>
   </div>
 
-<div id="list" class="music-list show">
+<div id="list" class="music-list">
       <div class="header">
        <i class="list material-icons">queue_music</i>
        <div class="row">
@@ -96,7 +96,7 @@
                 <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
                 <button id="searchButton" class="btn btn-primary mt-3" onclick="songs = [];fetchSongs(searchInput.value.trim());">
                   <i onclick="document.querySelector('.music-list').classList.toggle('show')
-                  " id="close" class="material-icons">search</i>
+                  " id="close" class="material-icons" style="position:absolute;top:0 ;margin-top: 8px;">search</i>
                 </button>
           </div>
         </div>
