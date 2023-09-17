@@ -1,35 +1,11 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaavnXX - Music Player</title>
+  <title>Music Player</title>
   <link rel="stylesheet" href="2.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="icon" href="logo.png"/>
   <link rel="manifest" href="manifest.json">
-
-<script>
-    // Check if the browser supports the beforeinstallprompt event
-    if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
-      window.addEventListener('load', () => {
-        // Wait for the beforeinstallprompt event
-        window.addEventListener('beforeinstallprompt', (event) => {
-          // Prevent the default "Add to Home Screen" prompt
-          event.preventDefault();
-
-          // Automatically show the "Add to Home Screen" prompt on page load
-          event.prompt();
-        });
-      });
-    }
-
-  window.addEventListener('load', () => {
-      window.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault();
-        event.prompt();
-      });
-    });
-  
-  </script>
   
 </head>
 <body>
@@ -91,18 +67,18 @@
       <ul id="songList"></ul>
     </div>
 
+    
 <div id="list"  class="music-list">
       <div class="header">
        <i class="list material-icons">queue_music</i>
-       <div class="row">
+       
           <div class="search">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search songs">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search Songs">
                 <button id="searchButton" class="btn btn-primary mt-3" onclick="songs = [];fetchSongs(searchInput.value.trim());">
-                  <i onclick="document.querySelector('.music-list').classList.toggle('show')
-                  " id="close" class="material-icons" style="position:absolute;top:0 ;margin-top: 8px;">search</i>
+                  <i onclick="document.querySelector('.music-list').classList.toggle('show')" id="close" class="material-icons" style="position:absolute;top:0 ;margin-top: 8px;">search</i>
                 </button>
           </div>
-        </div>
+        
         <i onclick="document.querySelector('#list').classList.toggle('show')
 " id="close" class="material-icons">close</i>
       </div>
@@ -128,6 +104,29 @@
 
   <script src="2.js"></script>
 
+  <script>
+    // Check if the browser supports the beforeinstallprompt event
+    if ('serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window) {
+      window.addEventListener('load', () => {
+        // Wait for the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (event) => {
+          // Prevent the default "Add to Home Screen" prompt
+          event.preventDefault();
+
+          // Automatically show the "Add to Home Screen" prompt on page load
+          event.prompt();
+        });
+      });
+    }
+
+  window.addEventListener('load', () => {
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        event.prompt();
+      });
+    });
+  
+</script>
 
 
 </body>
