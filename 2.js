@@ -198,7 +198,7 @@ nextButton.addEventListener('click', () => {
 
 // Search button event listener
 searchButton.addEventListener('click', () => {
-    songs = [];fetchSongs(searchInput.value.trim());
+    songs = [];currentSongIndex=0;fetchSongs(searchInput.value.trim());
 });
 
 // Update progress bar and time
