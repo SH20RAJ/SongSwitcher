@@ -72,25 +72,25 @@ function secondsToMinSec(seconds) {
 function loadSongDetails(index) {
     const selectedSong = songs[index];
     if (selectedSong) {
-        audioPlayer.src = selectedSong.downloadUrl[4].link; // Using 320kbps quality
+        audioPlayer.src = selectedSong.downloadUrl[4].url; // Using 320kbps quality
         audioPlayer.play();
-        songImage.src = selectedSong.image[2].link; // Using 500x500 image
+        songImage.src = selectedSong.image[2].url; // Using 500x500 image
       console.log(selectedSong);
       window.currentsong = selectedSong;
-      let str = selectedSong.primaryArtists;
+      let str = selectedSong.artists.primary[0].name;
       if(str.length > 10) str = str.substring(0,30)
-      document.querySelector('#name').innerHTML = selectedSong.name;
+      document.querySelector('#name').innerHTML = selectedSong.album.name;
        ;
       document.querySelector('#artist').innerHTML = str;
       document.querySelector('#max-duration').innerHTML = secondsToMinSec(selectedSong.duration); 
-        // Update download button link
+        // Update download button url
         const downloadButton = document.getElementById('downloadButton');
         downloadButton.onclick = () => downloadAudio(selectedSong);
 
       document.title = selectedSong.name;
       location.hash=selectedSong.id;
 
-      document.body.style.backgroundImage= `url(${selectedSong.image[2].link})`;
+      document.body.style.backgroundImage= `url(${selectedSong.image[2].url})`;
       // Step 2: Blur the background image using CSS
 document.body.style.backgroundSize = 'cover';
 //document.body.style = 'blur(10px)'; // Adjust the blur intensity as needed
@@ -101,7 +101,7 @@ document.body.style.backgroundSize = 'cover';
 }
 
 function downloadAudio(song) {
-  const audioUrl = song.downloadUrl[4].link; // Replace 4 with the appropriate index
+  const audioUrl = song.downloadUrl[4].url; // Replace 4 with the appropriate index
 
   fetch(audioUrl)
     .then((response) => {
@@ -151,7 +151,7 @@ function populateSongList() {
         listItem.innerHTML = `
         
       <li li-index="1" onclick="clicked(this)">
-                <img style="display: inli;border-radius:10px;" height="40" src="${song.image[1].link}" alt="" srcset="">
+                <img style="display: inli;border-radius:10px;" height="40" src="${song.image[1].url}" alt="" srcset="">
 <div class="row" style="width: 100%;
 margin-left: 10px;">
 
