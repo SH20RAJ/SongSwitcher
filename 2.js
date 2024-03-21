@@ -34,9 +34,12 @@ function fetchSongs(query,random,url) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
+                  console.log("out",songs,data);
+            
             if (data.status === 'SUCCESS' && data.data && data.data.results) {
               if(random){
                 songs = shuffleArray([...songs, ...data.data.results]);
+                  console.log("in",songs,data);
               } else {
                 songs = [...songs, ...data.data.results];
               };
