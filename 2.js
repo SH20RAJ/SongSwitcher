@@ -29,7 +29,7 @@ function shuffleArray(array) {
 }
 
 function fetchSongs(query,random,url) {
-  url = (url)?url:`https://saavn.dev/search/songs?query=${query}&page=1&limit=500`;
+  url = (url)?url:`https://saavn.dev/api/search/songs?query=${query}&page=1&limit=500`;
   console.log(url)
     fetch(url)
         .then(response => response.json())
